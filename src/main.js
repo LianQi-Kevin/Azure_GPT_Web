@@ -8,7 +8,7 @@ import localAxios from './localAxios/index.js'
 
 const app = createApp(App)
 
-app.config.globalProperties.$axios = localAxios
+app.config.globalProperties.$axios = new localAxios()
 app.config.globalProperties.$router = router
 
 app.use(ElementPlus)

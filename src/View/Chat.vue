@@ -1,12 +1,10 @@
 <template>
-    <div id="home">
-        <h1>Welcome</h1>
-    </div>
+  <h1>GPT4</h1>
 </template>
 
 <script>
 export default {
-    name: "Home"
+    name: "Chat"
 }
 </script>
 
