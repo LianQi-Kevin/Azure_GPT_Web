@@ -21,6 +21,8 @@
 <script>
 import {ElMessage} from "element-plus";
 import router from "../router"
+import {setLocalStorage} from '../storageUtils/localStorage.js'
+import {getCookie, setCookie} from "../storageUtils/cookies.js";
 
 export default {
     // 定义响应式数据体，用return返回响应式数据，使用this来指向该数据
@@ -39,6 +41,8 @@ export default {
             this.$axios.login(this.loginForm.username, this.loginForm.password
             ).then(function (response) {
                 ElMessage.success("Success Login");
+                setCookie("jwt_token", response.data["data"]["access_token"], "15m");
+                setLocalStorage("refresh_token", response.data["data"]["refresh_token"], "5m");
                 router.push({path: '/chat'})
             }).catch(function (error) {
                 ElMessage.error(error);
@@ -126,7 +130,7 @@ export default {
 .container .login .inputBox
 {
     position: relative;
-    min-width: 220px;
+    min-width: 240px;
 }
 
 .container .login .inputBox::placeholder {

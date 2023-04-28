@@ -1,15 +1,17 @@
-function setLocalStorage(key, value, expiry) {
-    /* 设置localStorage键值对，expiry为毫秒过期时间(从当前时间起算) */
+import {toMilliSecond} from "./utils.js"
+
+export function setLocalStorage(key, value, expiry) {
+    /* 设置localStorage键值对，expiry为过期时间(从当前时间起算) */
     const now = new Date()
     const item = {value: value}
     if (typeof expiry !== "undefined") {
-        item.expiry = now.getTime() + expiry
+        item.expiry = now.setTime(now.getTime() + toMilliSecond(expiry))
     }
     localStorage.setItem(key, JSON.stringify(item))
     return item
 }
 
-function getLocalStorage(key) {
+export function getLocalStorage(key) {
     /* 获取localStorage值, 过期则删除 */
     const itemStr = localStorage.getItem(key)
     if (!itemStr) {

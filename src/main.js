@@ -5,14 +5,17 @@ import 'element-plus/dist/index.css'
 import ElementPlus from 'element-plus'
 import router from './router/index.js'
 import localAxios from './localAxios/index.js'
-import VueCookies from 'vue-cookies'
+// import moment from 'moment';
 
 const app = createApp(App)
 
 app.config.globalProperties.$axios = new localAxios()
-// app.config.globalProperties.$router = router
+app.config.globalProperties.$router = router
+// app.config.globalProperties.$momet = moment
+// app.config.globalProperties.$cookies = VueCookies
 
-app.use(ElementPlus)
 app.use(router)
-app.use(VueCookies)
+router.app = app
+app.use(ElementPlus)
+
 app.mount('#app')
