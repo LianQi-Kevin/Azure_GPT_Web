@@ -1,17 +1,19 @@
 <template>
-    <div class="login">
-        <div class="login_context">
-            <el-form :model="loginForm" label-width="100px" class="login_box">
-                <el-form-item label="Username" prop="username">
-                    <el-input type="text" placeholder="Username" v-model="loginForm.username" />
-                </el-form-item>
-                <el-form-item label="Password" prop="password">
-                    <el-input type="password" placeholder="Password" show-password v-model="loginForm.password" />
-                </el-form-item>
-                <el-form-item class="login_btn">
-                    <el-button @click="loginSubmit">Submit</el-button>
-                </el-form-item>
-            </el-form>
+    <div class="container">
+        <i style="--clr:#00ff0a;" class="Decorative"></i>
+        <i style="--clr:#ff0057;" class="Decorative"></i>
+        <i style="--clr:#fffd44;" class="Decorative"></i>
+        <div class="login" style="text-align: -webkit-center">
+            <h1>Login</h1>
+            <div class="inputBox">
+                <el-input type="text" placeholder="Username" v-model="loginForm.username" size="large"/>
+            </div>
+            <div class="inputBox">
+                <el-input placeholder="Password" v-model="loginForm.password" show-password size="large"/>
+            </div>
+            <div class="inputBox">
+                <el-button type="primary" @click="loginSubmit" size="large">Sign In</el-button>
+            </div>
         </div>
     </div>
 </template>
@@ -36,10 +38,8 @@ export default {
             console.debug(JSON.stringify(this.loginForm))
             this.$axios.login(this.loginForm.username, this.loginForm.password
             ).then(function (response) {
-
-
                 ElMessage.success("Success Login");
-                router.push({path: '/home'})
+                router.push({path: '/chat'})
             }).catch(function (error) {
                 ElMessage.error(error);
             });
@@ -49,47 +49,87 @@ export default {
 </script>
 
 <style>
-.login {
-    /* 高度 */
-    height: 100%;
-    /* 背景色 */
-    background: rgb(225, 225, 225);
-}
-
-.login_context {
-    /* 宽度 */
-    width: 450px;
-    /* 高度 */
-    height: 300px;
-    /* 背景色 */
-    background: #fff;
-    /* 属性定位 */
+.container {
     position: absolute;
-    /* 属性定位，顶部占比 */
     top: 50%;
-    /* 属性定位，左侧占比 */
     left: 50%;
-    /* 水平垂直居中 */
     transform: translate(-50%, -50%);
-    /* 四个角的圆角角度 */
-    border-radius: 40px;
-    /* 阴影 */
-    box-shadow: 0 0 5px 2px #ddd;
-}
-
-.login_box {
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    padding: 0 50px;
-    /* 边框边距 */
-    box-sizing: border-box;
-}
-
-.login_btn {
-    /* 将对象作为弹性伸缩盒显示 */
+    min-width: 450px;
+    min-height: 450px;
+    max-width: 600px;
+    max-height: 600px;
     display: flex;
-    /* 横轴方向上的对齐方式 */
-    justify-content: flex-end;
+    justify-content: center;
+    align-items: center;
 }
-</style>
+
+.container i.Decorative {
+    position: absolute;
+    inset: 0;
+    border: 2px solid #fff;
+    transition: 0.5s;
+}
+
+.container i.Decorative:nth-child(1) {
+    border-radius: 43% 57% 74% 26% / 44% 30% 70% 56% ;
+    animation: animate 6s linear infinite;
+}
+
+.container i.Decorative:nth-child(2) {
+    border-radius: 62% 38% 42% 58% / 52% 32% 62% 48%;
+    animation: animate 4s linear infinite;
+}
+
+.container i.Decorative:nth-child(3) {
+    border-radius: 44% 56% 42% 58% / 37% 65% 35% 63%;
+    animation: animate2 10s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes animate2 {
+    0% {
+        transform: rotate(360deg);
+    }
+    100%{
+        transform: rotate(0deg);
+    }
+}
+
+.container:hover i {
+    border: 6px solid var(--clr);
+    filter: drop-shadow(0 0 20px var(--clr));
+}
+
+.container .login
+{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.container .login h1
+{
+    color: #fff;
+}
+
+.container .login .inputBox
+{
+    position: relative;
+    min-width: 220px;
+}
+
+.container .login .inputBox::placeholder {
+    color: white;
+}
+</style>W

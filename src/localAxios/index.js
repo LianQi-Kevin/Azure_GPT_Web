@@ -7,15 +7,13 @@ class AccountAxios{
             headers: {
                 'Content-Type': 'application/json',
             },
-            timeout: 5000
+            timeout: 15000
         })
     }
     login(username, password){
-        let config = {method: "POST", url: "/login",
-            data: JSON.stringify({username: username, password: password})}
-        return this.localAxios(config)
+        return this.localAxios.post('/login',
+            JSON.stringify({username: username, password: password}), {})
     }
-
 }
 
 
