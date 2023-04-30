@@ -1,6 +1,6 @@
 import moment from "moment";
 
-export function toMilliSecond(time) {
+function durationTime(time){
     /* 判断时间类型 s/m/h/d/w/M/y */
     let array = Array.from(time);
     let num = array.slice(0, -1).join('');
@@ -33,8 +33,16 @@ export function toMilliSecond(time) {
             uint = "years";
             break;
     }
-    /* 转换到毫秒 */
     if (uint !== null) {
-        return moment.duration(num, uint).asMilliseconds();
+        return moment.duration(num, uint);
     }
+}
+
+
+export function toSeconds(time) {
+    return durationTime(time).asSeconds()
+}
+
+export function toMilliSeconds(time) {
+    return durationTime(time).asMilliseconds()
 }

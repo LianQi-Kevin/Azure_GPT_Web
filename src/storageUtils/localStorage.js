@@ -1,11 +1,11 @@
-import {toMilliSecond} from "./utils.js"
+import {toMilliSeconds} from "./utils.js"
 
 export function setLocalStorage(key, value, expiry) {
-    /* 设置localStorage键值对，expiry为过期时间(从当前时间起算) */
+    /* 设置localStorage键值对，expiry为过期时间(从当前时间起算, UTC时间) */
     const now = new Date()
     const item = {value: value}
     if (typeof expiry !== "undefined") {
-        item.expiry = now.setTime(now.getTime() + toMilliSecond(expiry))
+        item.expiry = now.setTime(now.getTime() + toMilliSeconds(expiry))
     }
     localStorage.setItem(key, JSON.stringify(item))
     return item
