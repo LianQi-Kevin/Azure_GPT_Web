@@ -1,19 +1,26 @@
 <template>
     <div class="container">
-        <div class="list">list</div>
-        <div class="chat">chat</div>
+        <div class="header">
+            header
+        </div>
+        <div class="chat">
+            chat
+        </div>
         <div class="input">
-            <el-button>Clean Chat</el-button>
-            <el-input type="text" v-model="inputArea" clearable rows="4" show-word-limit autofocus>
-                <template #append>
-                    <el-button>Send</el-button>
-                </template>
-            </el-input>
+            <div class="centerInput">
+                <form class="typeArea">
+                    <textarea style="resize: none;"></textarea>
+                    <button>
+                        <img src="../assets/uploader.svg" alt="upload button" />
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+// import uploaderSVG from '../assets/uploader.svg'
 export default {
     data() {
         return {
@@ -21,7 +28,7 @@ export default {
         }
     },
     methods: {
-    }
+    },
 }
 </script>
 
@@ -34,23 +41,36 @@ export default {
     display: grid;
     width: 100%;
     height: 100%;
-    grid-template-areas: "list chat"
-  "list input";
-    grid-template-columns: 200px 1fr;
-    grid-template-rows: 1fr 100px;
+    grid-template-areas: "header"
+                         "chat"
+                         "input";
+    grid-template-columns: 1fr;
+    grid-template-rows: 2.5rem 1fr 100px;
 }
+
 .container > div {
     border: 1px dashed #888;
 }
 
-.list {
-    grid-area: list;
+.header {
+    grid-area: header;
 }
+
 .chat {
     grid-area: chat;
 }
 .input {
     grid-area: input;
+}
+
+form.typeArea {
     display: flex;
 }
+
+div.centerInput {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 </style>
